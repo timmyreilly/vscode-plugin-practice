@@ -8,7 +8,7 @@ APP = Flask(__name__)
 @APP.route("/")
 def hello():
     """Returns default page"""
-    return "Hello World"   
+    return "Hello World"
 
 if __name__ == "__main__":
     APP.run(debug=True)
