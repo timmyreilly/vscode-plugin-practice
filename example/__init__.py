@@ -1,12 +1,10 @@
 #!usr/bin/env python
-""" Welcome to my tiny flask app"""
+""" Moduly """
 from flask import Flask, render_template, request, redirect, url_for, abort, session
+from example.tokens import DS
 
 APP = Flask(__name__)
-APP.config['SECRET_KEY'] = 'secret';
-
-DS = "postgresql://tim:password@bitnami-postgresql-0ef4.cloudapp.net/todoapp"
-
+APP.config['SECRET_KEY'] = 'secret'
 APP.config['SQLALCHEMY_DATABASE_URI'] = DS
 
 @APP.route('/')
