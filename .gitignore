@@ -16,6 +16,7 @@ __pycache__/
 
 # Tokens
 tokens.py
+sqlalchem.py 
 
 # Auto-generated virtual environment
 /env/

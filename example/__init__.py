@@ -1,11 +1,26 @@
 #!usr/bin/env python
 """ Moduly """
 from flask import Flask, render_template, request, redirect, url_for, abort, session
-from example.tokens import DS
+# from models import User
+from flask_sqlalchemy import SQLAlchemy
 
 APP = Flask(__name__)
-APP.config['SECRET_KEY'] = 'secret'
-APP.config['SQLALCHEMY_DATABASE_URI'] = DS
+APP.config.from_pyfile('tokens.py')
+DB = SQLAlchemy(APP)
+
+class User(DB.Model):
+    ''' user model '''
+    
+
+class User(self, DB.Model):
+    '''User model'''
+    id = DB.Column(DB.Integer, primary_key=True)
+    username = DB.Column(DB.String(60))
+    message = DB.Column(DB.String)
+
+    def __init__(self, username, message):
+        self.username = username
+        self.message = message
 
 @APP.route('/')
 def home():
@@ -15,16 +30,22 @@ def home():
 @APP.route('/signup', methods=['POST'])
 def signup():
     '''signup'''
-    session['username'] = request.form['username']
-    session['message'] = request.form['message']
-    return redirect(url_for('message'))
+    user = User(request.form['username'], request.form['message'])
+    DB.session.add(user)
+    DB.session.commit()
+    return redirect(url_for('message', username=user.username))
 
 @APP.route('/message')
 def message():
     ''' message username '''
-    if 'username' not in session:
-        return abort(403)
-    return render_template('message.html', username=session['username'], message=session['message'])
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('message.html', username=user.username, message=user.message)
+
+def dbinit():
+    ''' Welp '''
+    DB.drop_all()
+    DB.create_all()
+    DB.session.add(User(username='bob'))
 
 if __name__ == "__main__":
     APP.run(debug=True)

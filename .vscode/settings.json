@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "python.pythonPath": "C:/Users/TimReilly/Envs/vscode/Scripts/python.exe",
-    "python.linting.pylintPath": "C:/Users/TimReilly/Envs/vscode/Scripts/pylint.exe" 
+    "python.linting.pylintPath": "C:/Users/TimReilly/Envs/vscode/Scripts/pylint.exe", 
+    "python.linting.enabled": false
 }
